@@ -13,7 +13,7 @@
 #          <--> input motion: sinusoidal acceleration at base
 wipe
 #
-#some user defined variables
+# some user defined variables
 # 
 set accMul   9.81     ;
 set massDen  2.000      ;# solid mass density
@@ -26,11 +26,11 @@ set E1      90000.0      ;#Young's modulus
 set poisson1 0.40 ;
 set G [expr $E1/(2*(1+$poisson1))] ;
 set B [expr $E1/(3*(1-2*$poisson1))] ;
-set press    0        ;# isotropic consolidation pressure on quad element(s)
-set period   1        ;# Period of applied sinusoidal load
-set deltaT   0.01     ;# time step for analysis
-set numSteps 2000     ;# Number of analysis steps
-set gamma    0.5      ;# Newmark integration parameter
+set press    0    ; # isotropic consolidation pressure on quad element(s)
+set period   1    ; # Period of applied sinusoidal load
+set deltaT   0.01 ; # time step for analysis
+set numSteps 2000 ; # Number of analysis steps
+set gamma    0.5  ; # Newmark integration parameter
 set pi 3.1415926535     ;
 set inclination 0       ;
 set unitWeightX [expr  ($massDen-$fluidDen)*9.81*sin($inclination/180.0*$pi)] ;# buoyant unit weight in X direction
@@ -82,7 +82,7 @@ analyze 2
 setTime 0.0
 wipeAnalysis
 
-equalDOF 3 4   1 2    ;#tie nodes 3 and 4
+equalDOF 3 4   1 2    ; # tie nodes 3 and 4
 
 # create a LoadPattern
 pattern UniformExcitation 1 1 -accel "Sine 0 10 $period -factor $accMul"
