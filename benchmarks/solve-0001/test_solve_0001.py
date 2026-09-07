@@ -1,7 +1,9 @@
+# Check that solvers dont fail when asked to solve size-zero systems.
+#
 import xara
 
 def test():
-    for system in ["BandSPD", "ProfileSPD", "Umfpack"]:
+    for system in ["ProfileSPD", "Umfpack", "BandSPD", "BandGen", "FullGen"]:
         ops = xara.Model(ndm=2, ndf=3)
         L = 100
         E = 29000
@@ -16,14 +18,11 @@ def test():
         ops.geomTransf('Linear',1)
         ops.element('elasticBeamColumn',1,(1,2),A,E,I,1)
 
-        ops.timeSeries('Constant',1)
-        ops.pattern('Plain',1,1)
+        ops.pattern('Plain',1,"Constant")
         # Unit displacement at node 2, DOF 2
         ops.sp(2,2,1.0, pattern=1)
 
         ops.constraints('Transformation')
-        #ops.system('BandSPD')
-        #ops.system('ProfileSPD')
         ops.system(system)
 
         ops.analysis('Static')
