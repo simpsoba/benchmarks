@@ -131,7 +131,7 @@ def create_section():
     return model, Ky
 
 
-def test():
+def analyze():
 
     model, Ky = create_section()
 
@@ -145,18 +145,17 @@ def test():
     # Call the section analysis procedure
     moment_curvature(model, 1, P, Ky*mu, numIncr)
 
-    u = model.nodeDisp(2,6)
-    if abs(u-0.00190476190476190541) < 1e-12:
-        print("Passed!")
-    else:
-        print(f"Failed!, {u} != 0.00190476190476190541")
-
     return model
 
 
+def test():
+    model = analyze()
+    u = model.nodeDisp(2,6)
+    assert abs(u-0.00190476190476190541) < 1e-12
+
 
 if __name__ == "__main__":
-    model = test()
+    model = analyze()
     for section in model.asdict()["StructuralAnalysisModel"]["properties"]["sections"]:
         if int(section["name"]) == 1:
             import veux.model
