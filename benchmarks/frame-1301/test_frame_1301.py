@@ -3,6 +3,7 @@ import jax
 jax.config.update("jax_enable_x64", True)
 import jax.numpy as np
 
+
 from xara.para import ChainModel
 from xara.auto import StaticAnalysis
 import pytest
@@ -13,7 +14,6 @@ def create_prism(length:    float,
                  steps = 1,
                  scale = 1.0,
                  orient: tuple  = (0, 0, 1),
-             #   orient = (0,  -1, 0)
                  transform: str = None,
                  divisions: int = 1,
                  rotation = None,
@@ -32,8 +32,6 @@ def create_prism(length:    float,
 
     nn = ne + 1
     def f(E, Iz):
-        # Number of elements discretizing the column
-
         E   = E
         G   = 1.0
         A   = 2.0
@@ -102,6 +100,7 @@ def solution(E, I, M, x, L):
     return (E*I/M)*np.sin(theta) - L # 
     #return E*I/M*(np.cos(theta) - 1.0)# +  (x - E*I/(E*I)) / (E * I)
 
+
 # def gradient(E, I, M, dE=0, dI=0, dx=0, x=1.0):
 
 #     dEI = dE*I + E*dI
@@ -112,6 +111,7 @@ def solution(E, I, M, x, L):
 #     return (
 #         dEI/M*np.sin(theta) + E*I/M*np.cos(theta) * dtheta
 #     )
+
 
 def run_bwd(element):
     L = 1.0
@@ -164,6 +164,7 @@ def run_bwd(element):
 def test_bwd():
     for element in ["ExactFrame", "ForceFrame", "PrismFrame"]:
         run_bwd(element)
+
 
 if __name__ == "__main__":
     run_bwd("ExactFrame")
