@@ -12,9 +12,9 @@ for {set ii 0} {$ii < [llength $strains]} {incr ii} {
 	# debug material model 
 	wipe
 
-	# #################################
+	#
 	# build model: -ndm 3  -ndf 3
-	# #################################
+	#
 	model BasicBuilder -ndm 3 -ndf 3
 
 	# create the nodes
@@ -82,6 +82,9 @@ for {set ii 0} {$ii < [llength $strains]} {incr ii} {
 	analysis    Static
 	 
 	analyze    2000
+
+	reactions
+	puts [nodeReaction 1]
 
 	wipe
 }
