@@ -1,5 +1,6 @@
+#
 # https://openseesdigital.com/2026/04/20/pathological-convergence/
-
+#
 import xara
 from math import isclose
 
