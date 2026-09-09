@@ -8,7 +8,7 @@ materials = [
     }
 ]
 
-def check(data):
+def check_multiaxial(data):
     materials = {
         type: xara.MultiaxialMaterial(type, **data).asdict()
         for type in ["J2BeamThread", "J2Plasticity"]
@@ -31,7 +31,7 @@ def test_yield():
         "G": 80e9,
         "Fy": 250e6,
     }
-    check(data)
+    check_multiaxial(data)
 
 def test_density():
     data = {
@@ -40,7 +40,7 @@ def test_density():
         "Fy": 250e6,
         "density": 7850,
     }
-    check(data)
+    check_multiaxial(data)
 
 if __name__ == "__main__":
     test_yield()
