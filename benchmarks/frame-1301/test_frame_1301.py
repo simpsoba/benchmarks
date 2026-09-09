@@ -1,4 +1,9 @@
-
+# Example from [1] 
+#
+# [1] C. M. Perez, 
+#     “Nonlinear modeling of frame members for rapid infrastructure assessment,” 
+#     Ph.D., University of California, Berkeley, Berkeley, CA, 2026.
+#
 import jax
 jax.config.update("jax_enable_x64", True)
 import jax.numpy as np
