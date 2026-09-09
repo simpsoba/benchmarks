@@ -21,6 +21,7 @@ node 18 -120.0 -120.0 432.0
 node 9 0.0 0.0 144.0 
 node 14 0.0 0.0 288.0 
 node 19 0.0 0.0 432.0 
+
 fix 1 1 1 1 1 1 1 
 fix 2 1 1 1 1 1 1 
 fix 3 1 1 1 1 1 1 
@@ -28,6 +29,11 @@ fix 4 1 1 1 1 1 1
 fix 9 0 0 1 1 1 0 
 fix 14 0 0 1 1 1 0 
 fix 19 0 0 1 1 1 0 
+
+mass  9 1.3426970473322934 1.3426970473322934 0.0 0.0 0.0 12889.891654390018 
+mass 14 1.3426970473322934 1.3426970473322934 0.0 0.0 0.0 12889.891654390018 
+mass 19 1.3426970473322934 1.3426970473322934 0.0 0.0 0.0 12889.891654390018 
+
 rigidDiaphragm 3 9 5 6 7 8 
 rigidDiaphragm 3 14 10 11 12 13 
 rigidDiaphragm 3 19 15 16 17 18 
@@ -80,9 +86,8 @@ element forceBeamColumn 21 15 16 -transform 2 -section 2 -shear 0
 element forceBeamColumn 22 16 17 -transform 2 -section 2 -shear 0
 element forceBeamColumn 23 17 18 -transform 2 -section 2 -shear 0
 element forceBeamColumn 24 18 15 -transform 2 -section 2 -shear 0
-mass 9 1.3426970473322934 1.3426970473322934 0.0 0.0 0.0 12889.891654390018 
-mass 14 1.3426970473322934 1.3426970473322934 0.0 0.0 0.0 12889.891654390018 
-mass 19 1.3426970473322934 1.3426970473322934 0.0 0.0 0.0 12889.891654390018 
+
+
 pattern Plain 1 Constant  {
   load  5 0.0 0.0 -129.6 0.0 0.0 0.0 -pattern 1 
   load  6 0.0 0.0 -129.6 0.0 0.0 0.0 -pattern 1 
