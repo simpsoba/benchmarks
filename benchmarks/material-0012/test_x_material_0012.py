@@ -13,12 +13,12 @@ E = 200000.0
 v = 0.3
 G = E/(2.0*(1.0+v))
 K = E/(3.0*(1.0-2.0*v))
-sig0 = 400.0
+Fy = 400.0
 
 
 import xara
 
-base = xara.MultiaxialMaterial("J2Plasticity", K, G, sig0, sig0, 0.0, 0.0)
+base = xara.MultiaxialMaterial("PlasticJ2", E=E, G=G, Fy=Fy)
 
 orth = xara.MultiaxialMaterial("Orthotropic", 
                                base, 
@@ -27,8 +27,10 @@ orth = xara.MultiaxialMaterial("Orthotropic",
                                Ez=E,
                                Gxy=G, Gyz=G, Gzx=G,
                                vxy=v, vyz=v, vzx=v,
-                               Axx=1.0/1.5, Ayy=1.0, Azz=1.0,
-                               Axyxy=1.0, Ayzyz=1.0, Axzxz=1.0)
+                               Axx=1.0/1.5, 
+                               Ayy=1.0, Azz=1.0,
+                               Axyxy=1.0, 
+                               Ayzyz=1.0, Axzxz=1.0)
 
 def create_patch(material):
 
@@ -69,10 +71,10 @@ def analyze_dir(dX, dY, material):
     model = create_patch(material)
 
     # a simple ramp
-    model.timeSeries( "Linear", 1, factor=2.0*sig0 )
+    model.timeSeries("Linear", 1, factor=2.0*Fy)
 
     # imposed stresses
-    model.pattern( "Plain", 1, 1 )
+    model.pattern("Plain", 1, 1 )
     model.load( 2, dX, 0.0 )
     model.load( 3, 0.0, dY )
 
@@ -93,7 +95,7 @@ def analyze_dir(dX, dY, material):
         model.analysis( "Static" )
         ok = model.analyze(1)
         if ok == 0:
-            stress = model.eleResponse( 1, "material", 1, "stress" )
+            stress = model.eleResponse(1, "material", 1, "stress" )
             sX = stress[0]
             sY = stress[1]
             Lambda += dLambda
