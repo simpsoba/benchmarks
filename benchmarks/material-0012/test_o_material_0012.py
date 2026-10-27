@@ -73,7 +73,7 @@ def analyze_openseespy(dX, dY, type):
         os.analysis( "Static" )
         ok = os.analyze( 1 )
         if ok == 0:
-            stress = os.eleResponse( 1, "material", 1, "stress" )
+            stress = os.eleResponse(1, "material", 1, "stress")
             sX = stress[0]
             sY = stress[1]
             Lambda += dLambda
@@ -88,7 +88,7 @@ def analyze_openseespy(dX, dY, type):
     return sX, sY
 
 
-def _test_openseespy():
+def test_openseespy():
     NDiv = 48
     NP = NDiv+1
     dAngle = 2.0*math.pi/NDiv

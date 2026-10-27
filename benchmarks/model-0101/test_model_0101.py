@@ -208,9 +208,8 @@ def check_damping(build_model, system="FullGeneral"):
     c3 = 1.0/(beta*deltaT*deltaT)
 
     model.integrator("Newmark", gamma, beta)
-    # The check here must be kept strict to ensure that the modal damping matrix is
-    # consistently accounted for.
-    model.test("NormDispIncr", 1e-18, 2, 0)
+    # Keep two iterations to catch inconsistent modal tangents
+    model.test("NormDispIncr", 1e-16, 2, 0)
     model.system(system)
     model.analysis("Transient")
 

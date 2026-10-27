@@ -30,7 +30,7 @@ def test_aisc_euler(element):
             rtol=rtol
         )
 
-@pytest.mark.parametrize("element", ["ForceFrame", "PrismFrame", "ShearFrame"]) # TODO("EulerFrame")
+@pytest.mark.parametrize("element", ["ForceFrame", "PrismFrame", "ShearFrame"])
 def test_aisc_shear(element):
 
     column = AISC_360_C1(shear=1)

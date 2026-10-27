@@ -4,7 +4,9 @@
 # Computational Geotechnics Eng Group, A. Ghofrani, P. Arduino - Dec 2013  #
 # Basic units are m, Ton(metric), s                                        #
 # ===------------------------------------------------------------------=== #
- 
+#
+# https://opensees.berkeley.edu/wiki/index.php/J2CyclicBoundingSurface_Material
+#
 set strains {0.05}
 
 for {set ii 0} {$ii < [llength $strains]} {incr ii} {
