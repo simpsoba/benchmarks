@@ -1,14 +1,36 @@
 #--------------------------------------------------------
+# Conventional triaxial compression test
 #
 # File is generated for the purposes of testing the#
-# Drucker-Prager model --> conventional triaxial #
-# compression test#
+# Drucker-Prager model 
 ##
 #   Created:  03.16.2009 CRM#
 #   Updated:  12.02.2011 CRM#
 ##
 ##
 #--------------------------------------------------------
+
+#--define material parameters for the model
+#---bulk modulus
+set k       27777.78
+#---shear modulus
+set G       9259.26
+#---yield stress
+set Fy    5.0
+#---failure surface and associativity
+set rho     0.398
+set rhoBar  0.398
+#---isotropic hardening
+set Fs      0.0
+set Fo      0.0
+set delta1  0.0
+#---kinematic hardening
+set H       0.0
+set theta   1.0
+#---tension softening
+set delta2  0.0
+#---mass density
+set mDen    1.7
 
 #-------------------------------------------------------
 # create the modelBuilder and build the model
@@ -35,27 +57,6 @@ fix 6 0 0 0
 fix 7 1 0 0
 fix 8 1 1 0
 
-#--define material parameters for the model
-#---bulk modulus
-set k       27777.78
-#---shear modulus
-set G       9259.26
-#---yield stress
-set Fy    5.0
-#---failure surface and associativity
-set rho     0.398
-set rhoBar  0.398
-#---isotropic hardening
-set Fs      0.0
-set Fo      0.0
-set delta1  0.0
-#---kinematic hardening
-set H       0.0
-set theta   1.0
-#---tension softening
-set delta2  0.0
-#---mass density
-set mDen    1.7
 
 #--material models
 nDMaterial DruckerPrager 2 \
@@ -90,7 +91,7 @@ set step 0.1
 set p 10.0
 set pNode [expr -$p*0.25] 
 
-#--loading object for hydrostatic pressure
+#--loading: hydrostatic pressure
 pattern Plain 1 {Series -time {0 10 100} -values {0 1 1} -factor 1} { 
     load 1  $pNode    0.0 0.0
     load 2  $pNode $pNode 0.0
@@ -100,7 +101,7 @@ pattern Plain 1 {Series -time {0 10 100} -values {0 1 1} -factor 1} {
     load 7     0.0 $pNode 0.0
 }
 
-#--loading object deviator stress
+#--loading: deviator stress
 pattern Plain 2 {Series -time {0 10 100} -values {0 1 5} -factor 1} { 
     load 5  0.0 0.0 $pNode
     load 6  0.0 0.0 $pNode

@@ -1,8 +1,8 @@
 #########################################################
 ##
 # File is generated for the purposes of testing the#
-#Drucker-Prager model --> conventional triaxial #
-# compression test#
+# Drucker-Prager model --> conventional triaxial #
+# compression test                                      #
 ##
 #   Created:  03.16.2009 CRM#
 #   Updated:  12.02.2011 CRM#

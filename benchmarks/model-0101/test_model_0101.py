@@ -161,7 +161,7 @@ def model_frame_3d():
 def _setup_modal(model):
     # Add modal damping to model, and return expected
     # damping matrix for comparison
-    ev = model.eigen(3, solver="fullGenLapack")
+    ev = model.eigen(3)#, solver="fullGenLapack")
 
     # Daming coefficients in first 3 modes
     c = [0.1, 0.02, 0.03]

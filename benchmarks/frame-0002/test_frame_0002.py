@@ -124,7 +124,7 @@ def solution(shape, shear=False):
 
 
 
-@pytest.mark.parametrize("element", ["ForceFrame", "PrismFrame"]) # TODO("EulerFrame")
+@pytest.mark.parametrize("element", ["ForceFrame", "PrismFrame", "EulerFrame"]) # TODO("EulerFrame")
 @pytest.mark.parametrize("load_type", ["global", "local", "node"])
 def test_terminal_loads_euler(load_type, element):
     shape = {
@@ -155,7 +155,7 @@ def test_terminal_loads_euler(load_type, element):
 
 
 
-@pytest.mark.parametrize("element", ["ForceFrame", "ShearFrame", "PrismFrame"])
+@pytest.mark.parametrize("element", ["ForceFrame", "LagrangeFrame", "PrismFrame"])
 @pytest.mark.parametrize("load_type", ["global", "local", "node"])
 def test_terminal_loads_shear(load_type, element):
     shape = {
@@ -181,7 +181,7 @@ def test_terminal_loads_shear(load_type, element):
         print(f"      U[{i}]: ", (Umodel[i] - Usoln[i])/Usoln[i]*100, "%")
 
     # Reduce tolerance since 2-node shear element will be poor
-    if "Shear" in element:
+    if "Lagrange" in element:
         utol = 0.3
         rtol = 1e-8 if load_type == "node" else utol
         assert Umodel[0] == pytest.approx(Usoln[0], rel=utol)
@@ -191,7 +191,7 @@ def test_terminal_loads_shear(load_type, element):
 
         assert Umodel[3] == pytest.approx(Usoln[3], rel=rtol)
         assert Umodel[4] == pytest.approx(Usoln[4], rel=rtol)
-        # TODO(ShearFrame): Torsional rotation
+        # TODO(LagrangeFrame): Torsional rotation
         if load_type == "node":
             assert Umodel[5] == pytest.approx(Usoln[5], rel=1e-6)
     else:
@@ -215,7 +215,7 @@ if __name__ == "__main__":
             test_terminal_loads_euler(load_type, element)
 
         print()
-        for element in "ForceFrame", "PrismFrame", "ShearFrame":
+        for element in "ForceFrame", "PrismFrame", "LagrangeFrame":
             print(f"  Running element={element}")
             test_terminal_loads_shear(load_type, element)
             print()
