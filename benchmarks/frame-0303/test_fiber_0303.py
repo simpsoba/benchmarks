@@ -96,6 +96,9 @@ def test_bwd():
     dIdh, dIdb = jax.grad(lambda d, b: b*d**3/12.0, (0,1))(d,b)
     dAdh, dAdb = jax.grad(lambda d, b: b*d, (0,1))(d,b)
 
+    dIdh, dIdb = map(float, (dIdh, dIdb))
+    dAdh, dAdb = map(float, (dAdh, dAdb))
+
     # dudI = -H*L**3/(3*E*I**2)
     # dudA = -H*L/(G*A**2)
     assert uy == pytest.approx(H*L**3/(3*E*Iy) + H*L/(G*A))
@@ -192,6 +195,9 @@ def test_fwd():
     dIdh, dIdb = jax.grad(lambda d, b: b*d**3/12.0, (0,1))(d,b)
     dAdh, dAdb = jax.grad(lambda d, b: b*d, (0,1))(d,b)
 
+    dIdh, dIdb = map(float, (dIdh, dIdb))
+    dAdh, dAdb = map(float, (dAdh, dAdb))
+
     assert uy == pytest.approx(H*L**3/(3*E*Iy) + H*L/(G*A))
     assert dh == pytest.approx(dIdh*dI + dAdh*dA, rel=1e-4)
     assert db == pytest.approx(dIdb*dI + dAdb*dA, rel=1e-4)
@@ -269,12 +275,14 @@ def test_grad():
         return analyze_1(L, E, fibers)
 
     du = jax.grad(analyze_2, (0,1,2,3))
-    dL, dE, dh, db = map(float,du(L, E, d, b))
+    dL, dE, dh, db = map(float, du(L, E, d, b))
 
     dI = -H*L**3/(3*E*Iy**2)
     dA = -H*L/(G*A**2)
     dIdh, dIdb = jax.grad(lambda d, b: b*d**3/12.0, (0,1))(d,b)
     dAdh, dAdb = jax.grad(lambda d, b: b*d, (0,1))(d,b)
+    dIdh, dIdb = map(float, (dIdh, dIdb))
+    dAdh, dAdb = map(float, (dAdh, dAdb))
 
     assert uy == pytest.approx(H*L**3/(3*E*Iy) + H*L/(G*A))
     assert dh == pytest.approx(dIdh*dI + dAdh*dA, rel=1e-5)
