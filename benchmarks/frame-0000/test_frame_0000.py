@@ -106,7 +106,7 @@ def test_transform_missing(element):
     model.fix(1, *fixed)
 
 
-    # Some reasonable properties
+    # Reasonable properties
     A, E, G, J, Iz, Iy = 0.18, 30e9, 12e9, 0.01, 0.005, 0.005
 
     model.section("ElasticFrame", 1, E=E, A=A, Iz=Iz, Iy=Iy, G=G, J=J)

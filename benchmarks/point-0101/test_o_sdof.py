@@ -203,7 +203,7 @@ def test64():
         buildModel(K,period,dampRatio)
 
         # add load pattern
-        ops.timeSeries('Path',1,'-filePath', plain_file, '-dt',dt,'-factor',g)
+        ops.timeSeries('Path',1, '-filePath', plain_file, '-dt',dt,'-factor',g)
         ops.pattern('UniformExcitation', 1, 1, '-accel',1)
 
         # build analysis
