@@ -34,6 +34,7 @@ def test_yield():
     }
     check_multiaxial(data)
 
+
 def test_density():
     data = {
         "E": 200e9,
